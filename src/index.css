@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --eco-blue:#0B1020; --eco-blue-2:#0F1730; --eco-blue-3:#121C3A;
+  --eco-text:#E9EEF7; --eco-text-2:#AAB4C6;
+  --eco-accent:#36D399; --eco-accent-2:#2BC28A;
+}
+html, body, #root { height: 100%; }
