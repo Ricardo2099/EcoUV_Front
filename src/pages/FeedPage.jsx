@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Notifications from "../components/Notifications.jsx"; 
 
-export default function FeedPage() {
+export default function FeedPage({ uv }) {
   const navigate = useNavigate();
   const [showGroups, setShowGroups] = useState(false);
 
@@ -63,13 +63,8 @@ export default function FeedPage() {
 
           {/* NOTIFICACIONES + PERFIL */}
           <div className="flex items-center gap-3">
-
-            {/* 🔔 Notificaciones en Navbar */}
             <Notifications />
-
-            {/* BOTÓN PERFIL */}
             <button
-              id="openProfile"
               onClick={() => navigate("/perfil")}
               className="bg-emerald-500 text-white px-4 py-2 rounded-xl hover:bg-emerald-600 transition"
             >
@@ -82,21 +77,14 @@ export default function FeedPage() {
       {/* MAIN */}
       <main className="mx-auto max-w-7xl px-4 py-8 grid grid-cols-1 md:grid-cols-12 gap-6">
         
-        {/* SIDEBAR IZQUIERDA */}
+        {/* SIDEBAR */}
         <aside className="md:col-span-3 space-y-6">
-
           <nav className="card p-4 space-y-2">
-            <button
-              className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl"
-              onClick={() => navigate("/feed")}
-            >
+            <button className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl" onClick={() => navigate("/feed")}>
               🏠 Feed
             </button>
 
-            <button
-              className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl"
-              onClick={() => navigate("/mis-publicaciones")}
-            >
+            <button className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl">
               🖼️ Mis publicaciones
             </button>
 
@@ -109,44 +97,42 @@ export default function FeedPage() {
             </button>
           </nav>
 
-          {/* SUBMENÚ DE GRUPOS */}
           {showGroups && (
             <div className="soft-border bg-[rgba(255,255,255,0.04)] p-4 space-y-2 animate-fadeIn">
-<button
-  className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl"
-  onClick={() => navigate("/grupo-facultad")}
->
-  🏛️ Grupo de facultad
-</button>
-
-<button
-  className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl"
-  onClick={() => navigate("/grupo-carrera")}
->
-  🎓 Grupo de carrera
-</button>
-
-<button
-  className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl"
-  onClick={() => navigate("/grupo-salon")}
->
-  🏫 Grupo de salón
-</button>
-
-<button
-  className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl"
-  onClick={() => navigate("/grupo-plan")}
->
-  📚 Grupo plan de estudio
-</button>
-
+              <button className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl" onClick={() => navigate("/grupo-facultad")}>
+                🏛️ Grupo de facultad
+              </button>
+              <button className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl" onClick={() => navigate("/grupo-carrera")}>
+                🎓 Grupo de carrera
+              </button>
+              <button className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl" onClick={() => navigate("/grupo-salon")}>
+                🏫 Grupo de salón
+              </button>
+              <button className="w-full text-left px-3 py-2 hover:bg-white/10 rounded-xl" onClick={() => navigate("/grupo-plan")}>
+                📚 Grupo plan de estudio
+              </button>
             </div>
           )}
         </aside>
 
-        {/* FEED PRINCIPAL */}
-        <section id="viewContainer" className="md:col-span-9 space-y-6">
-          <div className="card p-5 text-white bg-[#101830] border border-white/10">
+        {/* FEED */}
+        <section className="md:col-span-9 space-y-6">
+
+          {/* TARJETA UV */}
+          <div className="card p-4">
+            {uv ? (
+              <>
+                <h3 className="text-lg font-semibold">☀️ Índice UV</h3>
+                <p className="text-sm text-emerald-400">Nivel: {uv.nivelUV}</p>
+                <p className="text-sm text-gray-300">Riesgo: {uv.riesgo}</p>
+              </>
+            ) : (
+              <p className="text-gray-400">Cargando datos UV...</p>
+            )}
+          </div>
+
+          {/* PUBLICAR */}
+          <div className="card p-5">
             <textarea
               className="w-full resize-none focus:outline-none focus:ring-2 focus:ring-emerald-400"
               rows="3"
@@ -156,17 +142,18 @@ export default function FeedPage() {
             <hr className="my-4 border-white/10" />
 
             <div className="flex justify-between items-center">
-              <button className="flex-1 bg-blue-500 text-white font-semibold py-2 rounded-xl mx-1 hover:bg-blue-600 transition-all">
+              <button className="flex-1 bg-blue-500 text-white py-2 rounded-xl mx-1 hover:bg-blue-600">
                 Publicar
               </button>
-              <button className="flex-1 bg-green-500 text-white font-semibold py-2 rounded-xl mx-1 hover:bg-green-600 transition-all">
+              <button className="flex-1 bg-green-500 text-white py-2 rounded-xl mx-1 hover:bg-green-600">
                 Subir foto
               </button>
-              <button className="flex-1 bg-purple-500 text-white font-semibold py-2 rounded-xl mx-1 hover:bg-purple-600 transition-all">
+              <button className="flex-1 bg-purple-500 text-white py-2 rounded-xl mx-1 hover:bg-purple-600">
                 Subir archivo
               </button>
             </div>
           </div>
+
         </section>
       </main>
     </>
