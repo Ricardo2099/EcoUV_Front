@@ -1,6 +1,6 @@
 import { Bell, Upload, LogOut } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import Notifications from './notifications/Notifications.jsx'
+import Notifications from './Notifications.jsx'
 import Logo from './logo.jsx'
 
 export default function TopBar(){
